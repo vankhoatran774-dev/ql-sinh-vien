@@ -1,0 +1,180 @@
+.faculty-page {
+    padding: 24px;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #fdf2f8 0%, #eff6ff 45%, #fef3c7 100%);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #1f2937;
+}
+
+.faculty-page .page-shell {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    gap: 24px;
+}
+
+.faculty-page .hero-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding: 28px 30px;
+    border-radius: 24px;
+    background: linear-gradient(135deg, #7c3aed 0%, #2563eb 100%);
+    color: white;
+    box-shadow: 0 18px 45px rgba(124, 58, 237, 0.24);
+}
+
+.faculty-page .eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 700;
+    opacity: 0.9;
+    margin-bottom: 6px;
+}
+
+.faculty-page .hero-card h2 {
+    margin: 0 0 8px;
+    font-size: 30px;
+    font-weight: 800;
+}
+
+.faculty-page .hero-card p {
+    margin: 0;
+    opacity: 0.95;
+}
+
+.faculty-page .status-pill {
+    padding: 10px 14px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.16);
+    border: 1px solid rgba(255,255,255,0.25);
+    font-weight: 700;
+}
+
+.faculty-page .form-card,
+.faculty-page .preview-card {
+    padding: 28px;
+    border-radius: 24px;
+    background: rgba(255,255,255,0.94);
+    box-shadow: 0 16px 40px rgba(15,23,42,0.08);
+    border: 1px solid rgba(124,58,237,0.15);
+}
+
+.faculty-page .form {
+    display: grid;
+    gap: 18px;
+}
+
+.faculty-page .form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(240px, 1fr));
+    gap: 16px;
+}
+
+.faculty-page .field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.faculty-page .field-group.full {
+    grid-column: 1 / -1;
+}
+
+.faculty-page label {
+    font-weight: 700;
+    color: #374151;
+}
+
+.faculty-page input,
+.faculty-page select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 12px;
+    box-sizing: border-box;
+    font-size: 14px;
+    background: #f9fafb;
+}
+
+.faculty-page input:focus,
+.faculty-page select:focus {
+    border-color: #7c3aed;
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(124,58,237,0.14);
+    background: white;
+}
+
+.faculty-page .section-title {
+    margin: 0 0 12px;
+    color: #7c3aed;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.faculty-page .button-group {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.faculty-page .button-group.compact {
+    justify-content: flex-end;
+    margin-top: 0;
+}
+
+.faculty-page button {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 999px;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    font-weight: 700;
+    box-shadow: 0 8px 18px rgba(15,23,42,0.08);
+}
+
+.faculty-page button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(15,23,42,0.14);
+}
+
+.faculty-page .them { background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%); }
+.faculty-page .sua { background: linear-gradient(135deg, #d97706 0%, #f59e0b 100%); }
+.faculty-page .xoa { background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%); }
+.faculty-page .tim { background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%); }
+
+.faculty-page .preview-list {
+    display: grid;
+    gap: 10px;
+}
+
+.faculty-page .preview-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: #f8fafc;
+    box-shadow: 0 3px 10px rgba(15,23,42,0.04);
+}
+
+.faculty-page .badge {
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: #ede9fe;
+    color: #6d28d9;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+@media (max-width: 768px) {
+    .faculty-page { padding: 16px; }
+    .faculty-page .hero-card { flex-direction: column; align-items: flex-start; }
+    .faculty-page .form-grid { grid-template-columns: 1fr; }
+    .faculty-page .preview-item { flex-direction: column; align-items: flex-start; gap: 6px; }
+}

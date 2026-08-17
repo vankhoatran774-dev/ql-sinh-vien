@@ -1,0 +1,34 @@
+<section class="page-shell">
+  <div class="hero-card">
+    <div>
+      <div class="eyebrow">Tính năng hệ thống</div>
+      <h2>{{ icon }} {{ title }}</h2>
+      <p>{{ message }}</p>
+    </div>
+    <div class="status-pill">{{ status }}</div>
+  </div>
+
+  <div class="cards" *ngIf="stats.length">
+    <div class="card" *ngFor="let item of stats">
+      <h3>{{ item.label }}</h3>
+      <h1>{{ item.value }}</h1>
+      <p>{{ item.caption }}</p>
+    </div>
+  </div>
+
+  <div class="content-grid">
+    <div class="panel">
+      <h3>🎯 Điểm nổi bật</h3>
+      <ul>
+        <li *ngFor="let item of highlights">{{ item }}</li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <h3>⚡ Thao tác nhanh</h3>
+      <div class="actions">
+        <a *ngFor="let action of actions" [routerLink]="action.link">{{ action.label }}</a>
+      </div>
+    </div>
+  </div>
+</section>

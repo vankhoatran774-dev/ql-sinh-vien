@@ -1,0 +1,92 @@
+<div class="score-page">
+  <div class="page-shell">
+    <section class="hero-card">
+      <div>
+        <div class="eyebrow">Hệ thống quản lý</div>
+        <h2>Quản lý điểm</h2>
+        <p>Nhập và theo dõi kết quả học tập của sinh viên rõ ràng.</p>
+      </div>
+      <div class="status-pill">● Đang hoạt động</div>
+    </section>
+
+    <section class="form-card">
+      <h3 class="section-title">1. Nhập điểm</h3>
+      <div class="form-grid">
+        <div class="field-group">
+          <label>Mã điểm</label>
+          <input type="text" [(ngModel)]="form.scoreId" placeholder="Nhập mã điểm">
+        </div>
+        <div class="field-group">
+          <label>Mã sinh viên</label>
+          <input type="text" [(ngModel)]="form.studentId" placeholder="Nhập mã sinh viên">
+        </div>
+        <div class="field-group">
+          <label>Họ tên</label>
+          <input type="text" [(ngModel)]="form.studentName" placeholder="Nhập họ tên">
+        </div>
+        <div class="field-group">
+          <label>Môn học</label>
+          <input type="text" [(ngModel)]="form.subjectName" placeholder="Nhập môn học">
+        </div>
+        <div class="field-group">
+          <label>Điểm</label>
+          <input type="text" [(ngModel)]="form.score" placeholder="Nhập điểm">
+        </div>
+        <div class="field-group">
+          <label>Xếp loại</label>
+          <select [(ngModel)]="form.grade">
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+            <option value="F">F</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="info-box" *ngIf="message">{{ message }}</div>
+
+      <div class="button-group">
+        <button class="them" type="button" (click)="addScore()">➕ Thêm</button>
+        <button class="sua" type="button" (click)="addScore()">✏️ Cập nhật</button>
+        <button class="xoa" type="button" (click)="resetForm()">🧹 Xóa form</button>
+        <button class="xoa" type="button" (click)="clearAllScores()">🗑️ Xóa tất cả</button>
+        <button class="tim" type="button" (click)="searchScore()">🔍 Tìm kiếm</button>
+      </div>
+    </section>
+
+    <section class="form-card">
+      <h3 class="section-title">2. Bảng điểm</h3>
+      <div class="summary-bar">
+        <span>Tổng số: {{ totalScores }}</span>
+        <button class="tim" type="button" (click)="exportScores()">⬇️ Xuất CSV</button>
+      </div>
+      <div class="field-group">
+        <label>Tìm kiếm</label>
+        <input type="text" [(ngModel)]="searchText" placeholder="Nhập tên hoặc mã sinh viên">
+      </div>
+
+      <div class="preview-list" *ngIf="displayedScores.length; else emptyState">
+        <div class="preview-item" *ngFor="let item of displayedScores">
+          <div class="teacher-info-block">
+            <div class="teacher-main-info">
+              <strong>Họ tên: {{ item.studentName }}</strong>
+            </div>
+            <div class="teacher-id">Mã sinh viên: {{ item.studentId }}</div>
+            <div class="teacher-sub-info">Môn học: {{ item.subjectName || 'Chưa có môn học' }}</div>
+            <div class="detail-line">Điểm: {{ item.score || '—' }}</div>
+            <div class="detail-line">Xếp loại: {{ item.grade }}</div>
+          </div>
+          <div class="button-group compact">
+            <button class="sua" type="button" (click)="editScore(item)">Sửa</button>
+            <button class="xoa" type="button" (click)="deleteScore(item.id)">Xóa</button>
+          </div>
+        </div>
+      </div>
+
+      <ng-template #emptyState>
+        <p>Chưa có dữ liệu điểm nào.</p>
+      </ng-template>
+    </section>
+  </div>
+</div>

@@ -1,0 +1,103 @@
+<div class="teacher-page">
+    <div class="page-shell">
+        <section class="hero-card">
+            <div>
+                <div class="eyebrow">Hệ thống quản lý</div>
+                <h2>Quản lý giảng viên</h2>
+                <p>Quản lý dữ liệu giảng viên theo từng khoa và chuyên môn rõ ràng.</p>
+            </div>
+            <div class="status-pill">● Đang hoạt động</div>
+        </section>
+
+        <section class="form-card">
+            <h3 class="section-title">1. Nhập thông tin giảng viên</h3>
+            <div class="form">
+                <div class="form-grid">
+                    <div class="field-group">
+                        <label>Mã giảng viên</label>
+                        <input type="text" [(ngModel)]="form.teacherId" placeholder="Nhập mã giảng viên">
+                    </div>
+
+                    <div class="field-group">
+                        <label>Họ và tên</label>
+                        <input type="text" [(ngModel)]="form.fullName" placeholder="Nhập họ và tên">
+                    </div>
+
+                    <div class="field-group">
+                        <label>Khoa</label>
+                        <input type="text" [(ngModel)]="form.faculty" placeholder="Nhập khoa">
+                    </div>
+
+                    <div class="field-group">
+                        <label>Ngày sinh</label>
+                        <input type="date" [(ngModel)]="form.birthDate">
+                    </div>
+
+                    <div class="field-group">
+                        <label>Giới tính</label>
+                        <select [(ngModel)]="form.gender">
+                            <option value="Nam">Nam</option>
+                            <option value="Nữ">Nữ</option>
+                        </select>
+                    </div>
+
+                    <div class="field-group">
+                        <label>Số điện thoại</label>
+                        <input type="text" [(ngModel)]="form.phone" placeholder="Nhập số điện thoại">
+                    </div>
+
+                    <div class="field-group full">
+                        <label>Email</label>
+                        <input type="email" [(ngModel)]="form.email" placeholder="Nhập email">
+                    </div>
+                </div>
+
+                <div class="info-box" *ngIf="message">{{ message }}</div>
+
+                <div class="button-group">
+                    <button class="them" type="button" (click)="addTeacher()">➕ Thêm</button>
+                    <button class="sua" type="button" (click)="addTeacher()">✏️ Cập nhật</button>
+                    <button class="xoa" type="button" (click)="resetForm()">🧹 Xóa form</button>
+                    <button class="xoa" type="button" (click)="clearAllTeachers()">🗑️ Xóa tất cả</button>
+                    <button class="tim" type="button" (click)="searchTeacher()">🔍 Tìm kiếm</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="form-card">
+            <h3 class="section-title">2. Danh sách giảng viên</h3>
+            <div class="summary-bar">
+                <span>Tổng số: {{ totalTeachers }}</span>
+                <button class="tim" type="button" (click)="exportTeachers()">⬇️ Xuất CSV</button>
+            </div>
+            <div class="field-group">
+                <label>Tìm kiếm</label>
+                <input type="text" [(ngModel)]="searchText" placeholder="Nhập tên hoặc mã giảng viên">
+            </div>
+
+            <div class="preview-list" *ngIf="displayedTeachers.length; else emptyState">
+                <div class="preview-item" *ngFor="let teacher of displayedTeachers">
+                    <div class="teacher-info-block">
+                        <div class="teacher-main-info">
+                            <strong>Tên giảng viên: {{ teacher.fullName }}</strong>
+                        </div>
+                        <div class="teacher-id">Mã giảng viên: {{ teacher.teacherId }}</div>
+                        <div class="teacher-sub-info">Khoa: {{ teacher.faculty || 'Chưa có khoa' }}</div>
+                        <div class="detail-line">Giới tính: {{ teacher.gender || 'Chưa có giới tính' }}</div>
+                        <div class="detail-line">Ngày sinh: {{ teacher.birthDate || '—' }} • SĐT: {{ teacher.phone || '—' }}</div>
+                        <div class="detail-line">Email: {{ teacher.email || '—' }}</div>
+                    </div>
+                    <div class="button-group compact">
+                        <button class="sua" type="button" (click)="editTeacher(teacher)">Sửa</button>
+                        <button class="xoa" type="button" (click)="deleteTeacher(teacher.id)">Xóa</button>
+                    </div>
+                </div>
+            </div>
+
+            <ng-template #emptyState>
+                <p>Chưa có dữ liệu giảng viên nào.</p>
+            </ng-template>
+        </section>
+    </div>
+</div>
+

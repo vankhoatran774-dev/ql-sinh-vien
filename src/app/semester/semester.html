@@ -1,0 +1,86 @@
+<div class="semester-page">
+  <div class="page-shell">
+    <section class="hero-card">
+      <div>
+        <div class="eyebrow">Hệ thống quản lý</div>
+        <h2>Quản lý học kỳ</h2>
+        <p>Quản lý các học kỳ và thời gian diễn ra của từng kỳ.</p>
+      </div>
+      <div class="status-pill">● Đang hoạt động</div>
+    </section>
+
+    <section class="form-card">
+      <h3 class="section-title">1. Thông tin học kỳ</h3>
+      <div class="form-grid">
+        <div class="field-group">
+          <label>Mã học kỳ</label>
+          <input type="text" [(ngModel)]="form.semesterId" placeholder="Nhập mã học kỳ">
+        </div>
+        <div class="field-group">
+          <label>Tên học kỳ</label>
+          <input type="text" [(ngModel)]="form.semesterName" placeholder="Nhập tên học kỳ">
+        </div>
+        <div class="field-group">
+          <label>Ngày bắt đầu</label>
+          <input type="date" [(ngModel)]="form.startDate">
+        </div>
+        <div class="field-group">
+          <label>Ngày kết thúc</label>
+          <input type="date" [(ngModel)]="form.endDate">
+        </div>
+        <div class="field-group full">
+          <label>Trạng thái</label>
+          <select [(ngModel)]="form.status">
+            <option value="Đang diễn ra">Đang diễn ra</option>
+            <option value="Sắp diễn ra">Sắp diễn ra</option>
+            <option value="Đã kết thúc">Đã kết thúc</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="info-box" *ngIf="message">{{ message }}</div>
+
+      <div class="button-group">
+        <button class="them" type="button" (click)="addSemester()">➕ Thêm</button>
+        <button class="sua" type="button" (click)="addSemester()">✏️ Cập nhật</button>
+        <button class="xoa" type="button" (click)="resetForm()">🧹 Xóa form</button>
+        <button class="xoa" type="button" (click)="clearAllSemesters()">🗑️ Xóa tất cả</button>
+        <button class="tim" type="button" (click)="searchSemester()">🔍 Tìm kiếm</button>
+      </div>
+    </section>
+
+    <section class="form-card">
+      <h3 class="section-title">2. Danh sách học kỳ</h3>
+      <div class="summary-bar">
+        <span>Tổng số: {{ totalSemesters }}</span>
+        <button class="tim" type="button" (click)="exportSemesters()">⬇️ Xuất CSV</button>
+      </div>
+      <div class="field-group">
+        <label>Tìm kiếm</label>
+        <input type="text" [(ngModel)]="searchText" placeholder="Nhập tên hoặc mã học kỳ">
+      </div>
+
+      <div class="preview-list" *ngIf="displayedSemesters.length; else emptyState">
+        <div class="preview-item" *ngFor="let item of displayedSemesters">
+          <div class="teacher-info-block">
+            <div class="teacher-main-info">
+              <strong>Tên học kỳ: {{ item.semesterName }}</strong>
+            </div>
+            <div class="teacher-id">Mã học kỳ: {{ item.semesterId }}</div>
+            <div class="teacher-sub-info">Trạng thái: {{ item.status || 'Chưa có trạng thái' }}</div>
+            <div class="detail-line">Bắt đầu: {{ item.startDate || '—' }}</div>
+            <div class="detail-line">Kết thúc: {{ item.endDate || '—' }}</div>
+          </div>
+          <div class="button-group compact">
+            <button class="sua" type="button" (click)="editSemester(item)">Sửa</button>
+            <button class="xoa" type="button" (click)="deleteSemester(item.id)">Xóa</button>
+          </div>
+        </div>
+      </div>
+
+      <ng-template #emptyState>
+        <p>Chưa có dữ liệu học kỳ nào.</p>
+      </ng-template>
+    </section>
+  </div>
+</div>

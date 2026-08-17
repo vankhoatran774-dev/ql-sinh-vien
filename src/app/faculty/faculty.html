@@ -1,0 +1,88 @@
+<div class="faculty-page">
+    <div class="page-shell">
+        <section class="hero-card">
+            <div>
+                <div class="eyebrow">Hệ thống quản lý</div>
+                <h2>Quản lý khoa</h2>
+                <p>Quản lý thông tin khoa, trưởng khoa và liên hệ một cách gọn gàng.</p>
+            </div>
+            <div class="status-pill">● Đang hoạt động</div>
+        </section>
+
+        <section class="form-card">
+            <h3 class="section-title">1. Nhập thông tin khoa</h3>
+            <div class="form">
+                <div class="form-grid">
+                    <div class="field-group">
+                        <label>Mã khoa</label>
+                        <input type="text" [(ngModel)]="form.facultyId" placeholder="Nhập mã khoa">
+                    </div>
+
+                    <div class="field-group">
+                        <label>Tên khoa</label>
+                        <input type="text" [(ngModel)]="form.facultyName" placeholder="Nhập tên khoa">
+                    </div>
+
+                    <div class="field-group">
+                        <label>Trưởng khoa</label>
+                        <input type="text" [(ngModel)]="form.deanName" placeholder="Nhập tên trưởng khoa">
+                    </div>
+
+                    <div class="field-group">
+                        <label>Số điện thoại</label>
+                        <input type="text" [(ngModel)]="form.phone" placeholder="Nhập số điện thoại">
+                    </div>
+
+                    <div class="field-group full">
+                        <label>Email</label>
+                        <input type="email" [(ngModel)]="form.email" placeholder="Nhập email">
+                    </div>
+                </div>
+
+                <div class="info-box" *ngIf="message">{{ message }}</div>
+
+                <div class="button-group">
+                    <button class="them" type="button" (click)="addFaculty()">➕ Thêm</button>
+                    <button class="sua" type="button" (click)="addFaculty()">✏️ Cập nhật</button>
+                    <button class="xoa" type="button" (click)="resetForm()">🧹 Xóa form</button>
+                    <button class="xoa" type="button" (click)="clearAllFaculties()">🗑️ Xóa tất cả</button>
+                    <button class="tim" type="button" (click)="searchFaculty()">🔍 Tìm kiếm</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="form-card">
+            <h3 class="section-title">2. Danh sách khoa</h3>
+            <div class="summary-bar">
+                <span>Tổng số: {{ totalFaculties }}</span>
+                <button class="tim" type="button" (click)="exportFaculties()">⬇️ Xuất CSV</button>
+            </div>
+            <div class="field-group">
+                <label>Tìm kiếm</label>
+                <input type="text" [(ngModel)]="searchText" placeholder="Nhập tên hoặc mã khoa">
+            </div>
+
+            <div class="preview-list" *ngIf="displayedFaculties.length; else emptyState">
+                <div class="preview-item" *ngFor="let faculty of displayedFaculties">
+                    <div class="teacher-info-block">
+                        <div class="teacher-main-info">
+                            <strong>Tên khoa: {{ faculty.facultyName }}</strong>
+                        </div>
+                        <div class="teacher-id">Mã khoa: {{ faculty.facultyId }}</div>
+                        <div class="teacher-sub-info">Trưởng khoa: {{ faculty.deanName || 'Chưa có trưởng khoa' }}</div>
+                        <div class="detail-line">SĐT: {{ faculty.phone || '—' }}</div>
+                        <div class="detail-line">Email: {{ faculty.email || '—' }}</div>
+                    </div>
+                    <div class="button-group compact">
+                        <button class="sua" type="button" (click)="editFaculty(faculty)">Sửa</button>
+                        <button class="xoa" type="button" (click)="deleteFaculty(faculty.id)">Xóa</button>
+                    </div>
+                </div>
+            </div>
+
+            <ng-template #emptyState>
+                <p>Chưa có dữ liệu khoa nào.</p>
+            </ng-template>
+        </section>
+    </div>
+</div>

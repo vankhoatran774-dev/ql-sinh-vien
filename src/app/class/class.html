@@ -1,0 +1,88 @@
+<div class="faculty-page">
+    <div class="page-shell">
+        <section class="hero-card">
+            <div>
+                <div class="eyebrow">Hệ thống quản lý</div>
+                <h2>Quản lý lớp học</h2>
+                <p>Nhập và theo dõi thông tin lớp học một cách rõ ràng, dễ nhìn.</p>
+            </div>
+            <div class="status-pill">● Đang hoạt động</div>
+        </section>
+
+        <section class="form-card">
+            <h3 class="section-title">1. Nhập thông tin lớp</h3>
+            <div class="form">
+                <div class="form-grid">
+                    <div class="field-group">
+                        <label>Mã lớp</label>
+                        <input type="text" [(ngModel)]="form.classId" placeholder="Nhập mã lớp">
+                    </div>
+
+                    <div class="field-group">
+                        <label>Tên lớp</label>
+                        <input type="text" [(ngModel)]="form.className" placeholder="Nhập tên lớp">
+                    </div>
+
+                    <div class="field-group">
+                        <label>Khoa</label>
+                        <input type="text" [(ngModel)]="form.faculty" placeholder="Nhập tên khoa">
+                    </div>
+
+                    <div class="field-group">
+                        <label>Ngành</label>
+                        <input type="text" [(ngModel)]="form.major" placeholder="Nhập ngành học">
+                    </div>
+
+                    <div class="field-group full">
+                        <label>Cố vấn học tập</label>
+                        <input type="text" [(ngModel)]="form.advisor" placeholder="Nhập giáo viên cố vấn">
+                    </div>
+                </div>
+
+                <div class="info-box" *ngIf="message">{{ message }}</div>
+
+                <div class="button-group">
+                    <button class="them" type="button" (click)="addClass()">➕ Thêm</button>
+                    <button class="sua" type="button" (click)="addClass()">✏️ Cập nhật</button>
+                    <button class="xoa" type="button" (click)="resetForm()">🧹 Xóa form</button>
+                    <button class="xoa" type="button" (click)="clearAllClasses()">🗑️ Xóa tất cả</button>
+                    <button class="tim" type="button" (click)="searchClass()">🔍 Tìm kiếm</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="form-card">
+            <h3 class="section-title">2. Danh sách lớp</h3>
+            <div class="summary-bar">
+                <span>Tổng số: {{ totalClasses }}</span>
+                <button class="tim" type="button" (click)="exportClasses()">⬇️ Xuất CSV</button>
+            </div>
+            <div class="field-group">
+                <label>Tìm kiếm</label>
+                <input type="text" [(ngModel)]="searchText" placeholder="Nhập tên hoặc mã lớp">
+            </div>
+
+            <div class="preview-list" *ngIf="displayedClasses.length; else emptyState">
+                <div class="preview-item" *ngFor="let item of displayedClasses">
+                    <div class="teacher-info-block">
+                        <div class="teacher-main-info">
+                            <strong>Tên lớp: {{ item.className }}</strong>
+                        </div>
+                        <div class="teacher-id">Mã lớp: {{ item.classId }}</div>
+                        <div class="teacher-sub-info">Khoa: {{ item.faculty || 'Chưa có khoa' }}</div>
+                        <div class="detail-line">Ngành: {{ item.major || '—' }}</div>
+                        <div class="detail-line">Cố vấn: {{ item.advisor || '—' }}</div>
+                    </div>
+                    <div class="button-group compact">
+                        <button class="sua" type="button" (click)="editClass(item)">Sửa</button>
+                        <button class="xoa" type="button" (click)="deleteClass(item.id)">Xóa</button>
+                    </div>
+                </div>
+            </div>
+
+            <ng-template #emptyState>
+                <p>Chưa có dữ liệu lớp nào.</p>
+            </ng-template>
+        </section>
+    </div>
+</div>

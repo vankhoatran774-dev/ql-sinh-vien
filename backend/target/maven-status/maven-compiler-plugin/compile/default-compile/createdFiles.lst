@@ -1,0 +1,13 @@
+com\example\quanlysinhvien\teacher\TeacherController.class
+com\example\quanlysinhvien\QuanLySinhVienApplication.class
+com\example\quanlysinhvien\subject\Subject.class
+com\example\quanlysinhvien\student\Student.class
+com\example\quanlysinhvien\score\ScoreController.class
+com\example\quanlysinhvien\score\ScoreRepository.class
+com\example\quanlysinhvien\teacher\TeacherRepository.class
+com\example\quanlysinhvien\subject\SubjectController.class
+com\example\quanlysinhvien\teacher\Teacher.class
+com\example\quanlysinhvien\student\StudentRepository.class
+com\example\quanlysinhvien\score\Score.class
+com\example\quanlysinhvien\student\StudentController.class
+com\example\quanlysinhvien\subject\SubjectRepository.class

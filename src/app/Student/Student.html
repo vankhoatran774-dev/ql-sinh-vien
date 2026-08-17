@@ -1,0 +1,98 @@
+<div class="student-page">
+    <div class="page-shell">
+        <section class="hero-card">
+            <div>
+                <div class="eyebrow">Hệ thống quản lý</div>
+                <h2>Quản lý sinh viên</h2>
+                <p>Nhập và theo dõi thông tin sinh viên một cách rõ ràng và dễ quản lý.</p>
+            </div>
+            <div class="status-pill">● Đang hoạt động</div>
+        </section>
+
+        <section class="form-card">
+            <h3 class="section-title">1. Nhập thông tin sinh viên</h3>
+            <div class="form">
+                <div class="form-grid">
+                    <div class="field-group">
+                        <label>Mã sinh viên</label>
+                        <input type="text" [(ngModel)]="form.studentId" placeholder="Nhập mã sinh viên">
+                    </div>
+
+                    <div class="field-group">
+                        <label>Họ và tên</label>
+                        <input type="text" [(ngModel)]="form.fullName" placeholder="Nhập họ tên">
+                    </div>
+
+                    <div class="field-group">
+                        <label>Lớp</label>
+                        <input type="text" [(ngModel)]="form.className" placeholder="Nhập lớp">
+                    </div>
+
+                    <div class="field-group">
+                        <label>Ngày sinh</label>
+                        <input type="date" [(ngModel)]="form.birthDate">
+                    </div>
+
+                    <div class="field-group">
+                        <label>Giới tính</label>
+                        <select [(ngModel)]="form.gender">
+                            <option value="Nam">Nam</option>
+                            <option value="Nữ">Nữ</option>
+                        </select>
+                    </div>
+
+                    <div class="field-group">
+                        <label>Địa chỉ</label>
+                        <input type="text" [(ngModel)]="form.address" placeholder="Nhập địa chỉ">
+                    </div>
+                </div>
+
+                <div class="info-box" *ngIf="message">{{ message }}</div>
+
+                <div class="button-group">
+                    <button class="them" type="button" (click)="addStudent()">➕ Thêm</button>
+                    <button class="sua" type="button" (click)="addStudent()">✏️ Cập nhật</button>
+                    <button class="xoa" type="button" (click)="resetForm()">🧹 Xóa form</button>
+                    <button class="xoa" type="button" (click)="clearAllStudents()">🗑️ Xóa tất cả</button>
+                    <button class="tim" type="button" (click)="searchStudent()">🔍 Tìm kiếm</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="form-card">
+            <h3 class="section-title">2. Danh sách sinh viên</h3>
+            <div class="summary-bar">
+                <span>Tổng số: {{ totalStudents }}</span>
+                <button class="tim" type="button" (click)="exportStudents()">⬇️ Xuất CSV</button>
+            </div>
+            <div class="field-group">
+                <label>Tìm kiếm</label>
+                <input type="text" [(ngModel)]="searchText" placeholder="Nhập tên hoặc mã sinh viên">
+            </div>
+
+            <div class="preview-list" *ngIf="displayedStudents.length; else emptyState">
+                <div class="preview-item" *ngFor="let student of displayedStudents">
+                    <div class="teacher-info-block">
+                        <div class="teacher-main-info">
+                            <strong>Tên sinh viên: {{ student.fullName }}</strong>
+                        </div>
+                        <div class="teacher-id">Mã sinh viên: {{ student.studentId }}</div>
+                        <div class="teacher-sub-info">Lớp: {{ student.className || 'Chưa có lớp' }}</div>
+                        <div class="detail-line">Giới tính: {{ student.gender || 'Chưa có giới tính' }}</div>
+                        <div class="detail-line">Ngày sinh: {{ student.birthDate || '—' }}</div>
+                        <div class="detail-line">Địa chỉ: {{ student.address || '—' }}</div>
+                    </div>
+                    <div class="button-group compact">
+                        <button class="sua" type="button" (click)="editStudent(student)">Sửa</button>
+                        <button class="xoa" type="button" (click)="deleteStudent(student.id)">Xóa</button>
+                    </div>
+                </div>
+            </div>
+
+            <ng-template #emptyState>
+                <p>Chưa có dữ liệu sinh viên nào.</p>
+            </ng-template>
+        </section>
+    </div>
+</div>
+

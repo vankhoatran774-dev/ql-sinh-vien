@@ -1,0 +1,91 @@
+<div class="register-page">
+  <div class="page-shell">
+    <section class="hero-card">
+      <div>
+        <div class="eyebrow">Hệ thống quản lý</div>
+        <h2>Đăng ký môn học</h2>
+        <p>Quản lý đăng ký học phần cho sinh viên một cách thuận tiện.</p>
+      </div>
+      <div class="status-pill">● Đang hoạt động</div>
+    </section>
+
+    <section class="form-card">
+      <h3 class="section-title">1. Thông tin đăng ký</h3>
+      <div class="form-grid">
+        <div class="field-group">
+          <label>Mã đăng ký</label>
+          <input type="text" [(ngModel)]="form.registrationId" placeholder="Nhập mã đăng ký">
+        </div>
+        <div class="field-group">
+          <label>Mã sinh viên</label>
+          <input type="text" [(ngModel)]="form.studentId" placeholder="Nhập mã sinh viên">
+        </div>
+        <div class="field-group">
+          <label>Họ tên sinh viên</label>
+          <input type="text" [(ngModel)]="form.studentName" placeholder="Nhập họ tên">
+        </div>
+        <div class="field-group">
+          <label>Môn học</label>
+          <input type="text" [(ngModel)]="form.subjectName" placeholder="Nhập môn học">
+        </div>
+        <div class="field-group">
+          <label>Ngày đăng ký</label>
+          <input type="date" [(ngModel)]="form.registerDate">
+        </div>
+        <div class="field-group">
+          <label>Trạng thái</label>
+          <select [(ngModel)]="form.status">
+            <option value="Đã duyệt">Đã duyệt</option>
+            <option value="Chờ duyệt">Chờ duyệt</option>
+            <option value="Từ chối">Từ chối</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="info-box" *ngIf="message">{{ message }}</div>
+
+      <div class="button-group">
+        <button class="them" type="button" (click)="addRegistration()">➕ Thêm</button>
+        <button class="sua" type="button" (click)="addRegistration()">✏️ Cập nhật</button>
+        <button class="xoa" type="button" (click)="resetForm()">🧹 Xóa form</button>
+        <button class="xoa" type="button" (click)="clearAllRegistrations()">🗑️ Xóa tất cả</button>
+        <button class="tim" type="button" (click)="searchRegistration()">🔍 Tìm kiếm</button>
+      </div>
+    </section>
+
+    <section class="form-card">
+      <h3 class="section-title">2. Danh sách đăng ký</h3>
+      <div class="summary-bar">
+        <span>Tổng số: {{ totalRegistrations }}</span>
+        <button class="tim" type="button" (click)="exportRegistrations()">⬇️ Xuất CSV</button>
+      </div>
+      <div class="field-group">
+        <label>Tìm kiếm</label>
+        <input type="text" [(ngModel)]="searchText" placeholder="Nhập tên hoặc môn học">
+      </div>
+
+      <div class="preview-list" *ngIf="displayedRegistrations.length; else emptyState">
+        <div class="preview-item" *ngFor="let item of displayedRegistrations">
+          <div class="teacher-info-block">
+            <div class="teacher-main-info">
+              <strong>Họ tên sinh viên: {{ item.studentName }}</strong>
+            </div>
+            <div class="teacher-id">Mã đăng ký: {{ item.registrationId }}</div>
+            <div class="teacher-sub-info">Môn học: {{ item.subjectName || 'Chưa có môn học' }}</div>
+            <div class="detail-line">MSSV: {{ item.studentId || '—' }}</div>
+            <div class="detail-line">Ngày đăng ký: {{ item.registerDate || '—' }}</div>
+            <div class="detail-line">Trạng thái: {{ item.status }}</div>
+          </div>
+          <div class="button-group compact">
+            <button class="sua" type="button" (click)="editRegistration(item)">Sửa</button>
+            <button class="xoa" type="button" (click)="deleteRegistration(item.id)">Xóa</button>
+          </div>
+        </div>
+      </div>
+
+      <ng-template #emptyState>
+        <p>Chưa có dữ liệu đăng ký nào.</p>
+      </ng-template>
+    </section>
+  </div>
+</div>

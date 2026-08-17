@@ -1,0 +1,82 @@
+<div class="subject-page">
+  <div class="page-shell">
+    <section class="hero-card">
+      <div>
+        <div class="eyebrow">Hệ thống quản lý</div>
+        <h2>Quản lý môn học</h2>
+        <p>Quản lý các môn học, tín chỉ và khoa phụ trách.</p>
+      </div>
+      <div class="status-pill">● Đang hoạt động</div>
+    </section>
+
+    <section class="form-card">
+      <h3 class="section-title">1. Thông tin môn học</h3>
+      <div class="form-grid">
+        <div class="field-group">
+          <label>Mã môn</label>
+          <input type="text" [(ngModel)]="form.subjectId" placeholder="Nhập mã môn">
+        </div>
+        <div class="field-group">
+          <label>Tên môn</label>
+          <input type="text" [(ngModel)]="form.subjectName" placeholder="Nhập tên môn">
+        </div>
+        <div class="field-group">
+          <label>Số tín chỉ</label>
+          <input type="text" [(ngModel)]="form.credits" placeholder="Nhập số tín chỉ">
+        </div>
+        <div class="field-group">
+          <label>Khoa</label>
+          <input type="text" [(ngModel)]="form.department" placeholder="Nhập khoa">
+        </div>
+        <div class="field-group full">
+          <label>Mô tả</label>
+          <input type="text" [(ngModel)]="form.description" placeholder="Nhập mô tả môn học">
+        </div>
+      </div>
+
+      <div class="info-box" *ngIf="message">{{ message }}</div>
+
+      <div class="button-group">
+        <button class="them" type="button" (click)="addSubject()">➕ Thêm</button>
+        <button class="sua" type="button" (click)="addSubject()">✏️ Cập nhật</button>
+        <button class="xoa" type="button" (click)="resetForm()">🧹 Xóa form</button>
+        <button class="xoa" type="button" (click)="clearAllSubjects()">🗑️ Xóa tất cả</button>
+        <button class="tim" type="button" (click)="searchSubject()">🔍 Tìm kiếm</button>
+      </div>
+    </section>
+
+    <section class="form-card">
+      <h3 class="section-title">2. Danh sách môn học</h3>
+      <div class="summary-bar">
+        <span>Tổng số: {{ totalSubjects }}</span>
+        <button class="tim" type="button" (click)="exportSubjects()">⬇️ Xuất CSV</button>
+      </div>
+      <div class="field-group">
+        <label>Tìm kiếm</label>
+        <input type="text" [(ngModel)]="searchText" placeholder="Nhập tên hoặc mã môn">
+      </div>
+
+      <div class="preview-list" *ngIf="displayedSubjects.length; else emptyState">
+        <div class="preview-item" *ngFor="let item of displayedSubjects">
+          <div class="teacher-info-block">
+            <div class="teacher-main-info">
+              <strong>Tên môn: {{ item.subjectName }}</strong>
+            </div>
+            <div class="teacher-id">Mã môn: {{ item.subjectId }}</div>
+            <div class="teacher-sub-info">Khoa: {{ item.department || 'Chưa có khoa' }}</div>
+            <div class="detail-line">Tín chỉ: {{ item.credits || '—' }}</div>
+            <div class="detail-line">Mô tả: {{ item.description || '—' }}</div>
+          </div>
+          <div class="button-group compact">
+            <button class="sua" type="button" (click)="editSubject(item)">Sửa</button>
+            <button class="xoa" type="button" (click)="deleteSubject(item.id)">Xóa</button>
+          </div>
+        </div>
+      </div>
+
+      <ng-template #emptyState>
+        <p>Chưa có dữ liệu môn học nào.</p>
+      </ng-template>
+    </section>
+  </div>
+</div>
